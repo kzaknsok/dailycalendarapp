@@ -47,10 +47,20 @@ function initializeSelect(select, jsonData, day, container, displayComponent) {
         select.selectedIndex = 0;
     });
 
-    // 選択後もう一度プレースホルダー
-    container.addEventListener('click', () => {
-        select.selectedIndex = 0;
-        container.innerHTML = '';
+    // 画面をクリックした場合に初期化しないためのロジック
+    document.addEventListener('click', (event) => {
+        if (!select.contains(event.target) && !container.contains(event.target)) {
+            select.selectedIndex = 0;
+            container.innerHTML = '';
+            
+            // エラーメッセージを表示
+            const errorDiv = document.createElement('div');
+            errorDiv.id = 'error-message';
+            errorDiv.innerHTML = `
+                <h3>表示したいカレンダーを選択してください</h3>
+            `;
+            container.appendChild(errorDiv);
+        }
     });
 }
 
