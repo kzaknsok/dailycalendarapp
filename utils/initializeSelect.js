@@ -42,33 +42,6 @@ function initializeSelect(select, jsonData, day, container, displayComponent) {
                 errorDiv.remove();
             }
         }
-
-        // インデックス0　=> つまりプレースホルダーをセレクトする指示
-        select.selectedIndex = 0;
-    });
-
-    // 選択後もう一度プレースホルダー
-    container.addEventListener('click', () => {
-        select.selectedIndex = 0;
-        container.innerHTML = '';
-    });
-
-    // document全体のクリックイベントを監視
-    document.addEventListener('click', (event) => {
-        if (!select.contains(event.target) && !container.contains(event.target)) {
-            container.innerHTML = ''; // コンテナの内容をクリア
-            select.selectedIndex = 0; // プレースホルダーを再選択
-
-            // エラーメッセージを表示
-            const errorDiv = document.createElement('div');
-            errorDiv.id = 'error-message';
-            errorDiv.innerHTML = `
-                <br>
-                <p style="font-size: 1.1rem;">表示したいカレンダーを選択してください</p>
-                <br>
-            `;
-            container.appendChild(errorDiv);
-        }
     });
 }
 
